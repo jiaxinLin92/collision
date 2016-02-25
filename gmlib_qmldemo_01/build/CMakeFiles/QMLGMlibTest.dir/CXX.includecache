@@ -4414,6 +4414,18 @@ core/utils/gmcolor.h
 opengl/gmopengl.h
 -
 
+C:/programming/gmlib_qmldemo_01/Controller.h
+testsphereball.h
+C:/programming/gmlib_qmldemo_01/testsphereball.h
+mp.h
+C:/programming/gmlib_qmldemo_01/mp.h
+collision.h
+C:/programming/gmlib_qmldemo_01/collision.h
+myplane.h
+C:/programming/gmlib_qmldemo_01/myplane.h
+myplanenine.h
+C:/programming/gmlib_qmldemo_01/myplanenine.h
+
 C:/programming/gmlib_qmldemo_01/MYPlanenine.c
 MYPlanenine.h
 C:/programming/gmlib_qmldemo_01/MYPlanenine.h
@@ -4463,18 +4475,6 @@ testsphereball.h
 C:/programming/gmlib_qmldemo_01/testsphereball.h
 mp.h
 C:/programming/gmlib_qmldemo_01/mp.h
-
-C:/programming/gmlib_qmldemo_01/controller.h
-testsphereball.h
-C:/programming/gmlib_qmldemo_01/testsphereball.h
-mp.h
-C:/programming/gmlib_qmldemo_01/mp.h
-collision.h
-C:/programming/gmlib_qmldemo_01/collision.h
-myplane.h
-C:/programming/gmlib_qmldemo_01/myplane.h
-myplanenine.h
-C:/programming/gmlib_qmldemo_01/myplanenine.h
 
 C:/programming/gmlib_qmldemo_01/glcontextsurfacewrapper.cpp
 glcontextsurfacewrapper.h
@@ -4549,8 +4549,8 @@ myplanenine.h
 C:/programming/gmlib_qmldemo_01/myplanenine.h
 mp.h
 C:/programming/gmlib_qmldemo_01/mp.h
-controller.h
-C:/programming/gmlib_qmldemo_01/controller.h
+Controller.h
+C:/programming/gmlib_qmldemo_01/Controller.h
 gmOpenglModule
 -
 gmSceneModule

@@ -8,7 +8,7 @@
 #include "myplane.h"
 #include "myplanenine.h"
 #include "mp.h"
-#include "controller.h"
+#include "Controller.h"
 
 
 // GMlib
@@ -291,7 +291,7 @@ void GMlibWrapper::initScene() {
 //    floor->toggleDefaultVisualizer();
 //    floor->setMaterial(GMlib::GMmaterial::Brass);
 //    floor->replot(50,50,1,1);
-//    auto con=new controller(floor);
+//    auto con=new Controller(floor);
 //    _scene->insert(con);
 
     GMlib::DMatrix<GMlib::Vector<float,3> > m0(3,3);
@@ -319,7 +319,7 @@ void GMlibWrapper::initScene() {
     nine->setMaterial(GMlib::GMmaterial::Copper);
 
     nine->replot(20,20,1,1);
-    auto con=new controller(nine);
+    auto con=new Controller(nine);
     _scene->insert(con);
 
     // mp:wall(left) point and two vector (should consider the normal direction)
@@ -329,7 +329,7 @@ void GMlibWrapper::initScene() {
                        GMlib::Vector<float,3>(0,-20,0));//vector y direction
     left->toggleDefaultVisualizer();
     left->replot(50,50,1,1);
-    //auto leftW=new controller(left);
+    //auto leftW=new Controller(left);
     con->addWall(left);
 
     // mp:wall(right)
@@ -387,7 +387,7 @@ void GMlibWrapper::initScene() {
     sphere3->translate(GMlib::Vector<float,3>( -3.0f, 3.0f, 0.0f));
     sphere3->replot(20,20,1,1);
 
-    auto sphere4 = new Testsphere(1,GMlib::Vector<float,3>( -7.0f, -5.0f, 0.0f),1,nine);
+    auto sphere4 = new Testsphere(1,GMlib::Vector<float,3>( -7.0f, -10.0f, 0.0f),1,nine);
     con->addSphere((sphere4));
     sphere4->enableDefaultVisualizer();;
     sphere4->setMaterial(GMlib::GMmaterial::PolishedRed);
@@ -764,6 +764,12 @@ GMlibWrapper::keyPressed(const QString& name, QKeyEvent* event) {
 
     if( event->key() == Qt::Key_R ) _scene->toggleRun();
 
+    if( event->key() == Qt::Key_Q )
+    {
+        _select_multiple_objects_pressed = true;
+
+
+    }
     if( event->key() == Qt::Key_E )
     {
         _glsurface->makeCurrent();
@@ -881,6 +887,8 @@ void GMlibWrapper::keyReleased(const QString& name, QKeyEvent* event) {
     if(event->key() == Qt::Key_Control)
         _rotate_object_button_pressed = false;
     if(event->key() == Qt::Key_Alt)
+        _select_multiple_objects_pressed = false;
+    if(event->key() == Qt::Key_Q)
         _select_multiple_objects_pressed = false;
 }
 

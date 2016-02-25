@@ -1,7 +1,7 @@
 
 //class Testsphere;
 //class MP;
-//class controller;
+//class Controller;
 class GLContextSurfaceWrapper;
 
 
@@ -74,6 +74,7 @@ public slots:
 
 
 
+
   void                                  mousePressed( const QString& name, QMouseEvent* event );
   void                                  mouseReleased( const QString& name, QMouseEvent* event );
   void                                  mouseDoubleClicked( const QString& name, QMouseEvent* event );
@@ -99,9 +100,10 @@ private:
   bool                                              _move_object_button_pressed {false};
   bool                                              _select_multiple_objects_pressed {false};
   bool                                              _rotate_object_button_pressed {false};
+//  bool                                              _give_ball_force{false};
   GMlib::Point<int,2>                               _current_mouse_pos;
   GMlib::Point<int,2>                               _prev_mouse_pos;
-//  controller *                                      _con;
+//  Controller *                                      _con;
 
 signals:
   void                                              signFrameReady();

@@ -19,11 +19,7 @@
    using PPlane::PPlane;
    ~MP(){}
 
-    GMlib::Point<float,3>& getCornerPoint(){
 
-       return this->_pt;
-
-    }
   };
 
 

@@ -8,17 +8,18 @@
 #include"myplane.h"
 #include"myplanenine.h"
 
-class controller: public GMlib::PSphere<float> {
-GM_SCENEOBJECT(controller)
+class Controller: public GMlib::PSphere<float>
+{
+GM_SCENEOBJECT(Controller)
 
 private:
-  MYPlanenine<float>* _plane;
-  GMlib::Array<Testsphere*> _sphereArray;
-  GMlib::Array<MP *> _wallArray;
-  GMlib::Array<Collison> _collisionArray;
+    MYPlanenine<float>* _plane;
+    GMlib::Array<Testsphere*> _sphereArray;
+    GMlib::Array<MP *> _wallArray;
+    GMlib::Array<Collison> _collisionArray;
 
 public:
-    controller(MYPlanenine<float>* plane)
+    Controller(MYPlanenine<float>* plane)
     {
         this->_plane=plane;
         this->toggleDefaultVisualizer();
@@ -51,17 +52,17 @@ public:
 
         float radious = s->getRadius();
 
-        GMlib::Vector<float,3> d = matr[0][0]-positionSphere;
+        GMlib::Vector<float,3> d = positionSphere-matr[0][0];
         GMlib::Vector<float,3> n = w->getNormal();
         GMlib::Vector<float,3> ds = s->getDs();
 
         // check if the ball running out the wall
 
-         double x = (radious+(d*n))/(ds*n);
-         if(x >0 && x<=1)
-            {
-             collisionArray.insertAlways(Collison(s,w,x));
-            }
+        double x = (radious-(d*n))/(ds*n);
+        if(ds*n<0 &&x >0 && x<=1)
+        {
+            collisionArray.insertAlways(Collison(s,w,x));
+        }
 
 
 
@@ -90,14 +91,21 @@ public:
         double c = Dp*Dp -r*r;
 
         double delta = b*b-a*c;
-        if(delta < 0){
-        }else if(delta == 0){
-        }else{
+        if(delta < 0)
+        {
+
+        }
+        else if(delta == 0)
+        {
+
+        }else
+        {
               double x = (-b-sqrt(delta))/a;
-              if(x>0 && x<=1){
+              if(x>0 && x<=1)
+              {
                 collisionArray.insertAlways(Collison(s1,s2,x));
               }
-            }
+        }
     }
 
 
@@ -105,6 +113,7 @@ public:
     {
         GMlib::Vector<float,3> _vel = s->getVelocity();
         _vel -= 2*(w->getNormal()*_vel)*w->getNormal();
+
         s->setVelocity(_vel);
         s->computeStep(dt);
     }
@@ -140,51 +149,56 @@ public:
     }
 
 protected:
-  void localSimulate(double dt)
-  {
+    void localSimulate(double dt)
+    {
 
-      for(int i=0; i<_sphereArray.getSize(); i++){
+    for(int i=0; i<_sphereArray.getSize(); i++)
+    {
 
         _sphereArray[i]->computeStep(dt);
-      }
+    }
 
 
-      for (int i=0;i<_sphereArray.size();i++){
-        for(int j=i+1;j<_sphereArray.size();j++){
-          findcollisionSS(_sphereArray[i],_sphereArray[j],_collisionArray);
+    for (int i=0;i<_sphereArray.size();i++)
+    {
+        for(int j=i+1;j<_sphereArray.size();j++)
+        {
+            findcollisionSS(_sphereArray[i],_sphereArray[j],_collisionArray);
         }
-      }
+    }
 
-      for (int i=0;i<_sphereArray.size();i++){
-        for(int j=0;j<_wallArray.size();j++){
-          findcollisionSW(_sphereArray[i],_wallArray[j],_collisionArray);
+    for (int i=0;i<_sphereArray.size();i++)
+    {
+        for(int j=0;j<_wallArray.size();j++)
+        {
+            findcollisionSW(_sphereArray[i],_wallArray[j],_collisionArray);
         }
-      }
+    }
 
-      while(_collisionArray.getSize()>0)
-      {
+    while(_collisionArray.getSize()>0)
+    {
 
-        _collisionArray.sort();
-        _collisionArray.makeUnique();
+    _collisionArray.sort();
+    _collisionArray.makeUnique();
 
-        auto collison = _collisionArray[0];
+    auto collison = _collisionArray[0];
 
-        _collisionArray.removeIndex(0);
+    _collisionArray.removeIndex(0);
 
-        if(collison.isSW()){
+        if(collison.isSW())
+        {
 
-          collisionSW(collison.getSphere(0), collison.getWall(),(1-collison.getX())*dt);
+            collisionSW(collison.getSphere(0), collison.getWall(),(1-collison.getX())*dt);
 
         }
 
-            else{
+        else
+        {
+            collisionSS(collison.getSphere(0), collison.getSphere(1),(1-collison.getX())*dt);
 
+        }
 
-                  collisionSS(collison.getSphere(0), collison.getSphere(1),(1-collison.getX())*dt);
-
-            }
-
-      }
+    }
     }
 
 };

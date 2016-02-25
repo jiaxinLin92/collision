@@ -916,10 +916,10 @@ CMakeFiles/QMLGMlibTest.dir/gmlibwrapper.cpp.obj: C:/programming/gmlib/modules/s
 CMakeFiles/QMLGMlibTest.dir/gmlibwrapper.cpp.obj: C:/programming/gmlib/modules/scene/src/visualizers/gmselectorvisualizer.h
 CMakeFiles/QMLGMlibTest.dir/gmlibwrapper.cpp.obj: C:/programming/gmlib/modules/scene/src/visualizers/gmstdrepvisualizer.h
 CMakeFiles/QMLGMlibTest.dir/gmlibwrapper.cpp.obj: C:/programming/gmlib/modules/scene/src/visualizers/gmsurroundingspherevisualizer.h
+CMakeFiles/QMLGMlibTest.dir/gmlibwrapper.cpp.obj: ../Controller.h
 CMakeFiles/QMLGMlibTest.dir/gmlibwrapper.cpp.obj: ../MYPlanenine.c
 CMakeFiles/QMLGMlibTest.dir/gmlibwrapper.cpp.obj: ../MYPlanenine.h
 CMakeFiles/QMLGMlibTest.dir/gmlibwrapper.cpp.obj: ../collision.h
-CMakeFiles/QMLGMlibTest.dir/gmlibwrapper.cpp.obj: ../controller.h
 CMakeFiles/QMLGMlibTest.dir/gmlibwrapper.cpp.obj: ../glcontextsurfacewrapper.h
 CMakeFiles/QMLGMlibTest.dir/gmlibwrapper.cpp.obj: ../gmlibwrapper.cpp
 CMakeFiles/QMLGMlibTest.dir/gmlibwrapper.cpp.obj: ../gmlibwrapper.h
