@@ -10,7 +10,7 @@
 
 #include "../gmlib/modules/parametrics/src/gmpsurf.h"
 #include<parametrics/gmpplane>
-#include<parametrics/gmpbeziersurf>
+
 
 //  template <typename T>
   class MP : public GMlib::PPlane<float> {
