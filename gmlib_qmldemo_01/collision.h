@@ -48,7 +48,6 @@ public:
     }
 
 
-//some confouse----------------------------------------------
     bool operator == (const Collison& other) const
     {
         if(_sphere[0] == other._sphere[0]) return true;
@@ -57,7 +56,7 @@ public:
         if(!other._isSw && _sphere[1] == other._sphere[1]) return true;
         return false;
     }
-    //--------------------------------------------------------------
+
     bool operator < (const Collison& other) const
     {
         return _x < other._x;
