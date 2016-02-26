@@ -179,14 +179,15 @@ void GMlibWrapper::initScene() {
   _glsurface->makeCurrent(); {
 
     // Insert a light
-    GMlib::Point<GLfloat,3> init_light_pos( 2.0, 4.0, 10 );
+    GMlib::Point<GLfloat,3> init_light_pos( 2.0, 6.0, 10 );
     GMlib::PointLight *light = new GMlib::PointLight(  GMlib::GMcolor::White, GMlib::GMcolor::White,
                                                        GMlib::GMcolor::White, init_light_pos );
-    light->setAttenuation(0.8, 0.002, 0.0008);
+    light->setAttenuation(0.1, 0.002, 0.0008);
     _scene->insertLight( light, false );
 
     // Insert Sun
     _scene->insertSun();
+
 
 
     int init_viewport_size = 600;
@@ -215,6 +216,7 @@ void GMlibWrapper::initScene() {
     proj_rcpair.camera->translateGlobal( GMlib::Vector<float,3>( 0.0f, -20.0f, 20.0f ) );
     _scene->insertCamera( proj_rcpair.camera.get() );
     proj_rcpair.render->reshape( GMlib::Vector<int,2>(init_viewport_size, init_viewport_size) );
+ //   proj_rcpair.render->setClearColor(GMlib::GMcolor::Black);
 
     // Front cam
     auto& front_rcpair = _rc_pairs["Front"];
@@ -355,7 +357,7 @@ void GMlibWrapper::initScene() {
                         GMlib::Vector<float,3>(0,0,3),
                         GMlib::Vector<float,3>(20,0,0))//vector x direction
                            ;//vector z  direction
-    front->toggleDefaultVisualizer();
+    front->enableDefaultVisualizer();
     front->replot(50,50,1,1);
     con->addWall(front);
 
@@ -394,6 +396,14 @@ void GMlibWrapper::initScene() {
     sphere4->translate(GMlib::Vector<float,3>( -3.0f, -3.0f, 0.0f));
     sphere4->replot(20,20,1,1);
 
+    //player controlled ball
+
+    _cBall = new Testsphere(1,GMlib::Vector<float,3>( -7.0f, -10.0f, 0.0f),1,nine);
+    con->addSphere(_cBall);
+    _cBall->enableDefaultVisualizer();
+    _cBall->replot(100,100,1,1);
+    _cBall->setMaterial(GMlib::GMmaterial::Snow);
+    _cBall->translate(GMlib::Point<float,3>(0,5,1));
 
     #endif
 
@@ -766,7 +776,7 @@ GMlibWrapper::keyPressed(const QString& name, QKeyEvent* event) {
 
     if( event->key() == Qt::Key_Q )
     {
-        _select_multiple_objects_pressed = true;
+
 
 
     }
@@ -877,6 +887,25 @@ GMlibWrapper::keyPressed(const QString& name, QKeyEvent* event) {
         }
         _glsurface->doneCurrent();
     }
+    if(event->key() == Qt::Key_Up)
+        {
+            _cBall->moveUp();
+        }
+
+        if(event->key() == Qt::Key_Down)
+        {
+            _cBall->moveDown();
+        }
+
+        if(event->key() == Qt::Key_Left)
+        {
+            _cBall->moveLeft();
+        }
+
+        if(event->key() == Qt::Key_Right)
+        {
+            _cBall->moveRight();
+        }
 }
 
 void GMlibWrapper::keyReleased(const QString& name, QKeyEvent* event) {
@@ -888,8 +917,8 @@ void GMlibWrapper::keyReleased(const QString& name, QKeyEvent* event) {
         _rotate_object_button_pressed = false;
     if(event->key() == Qt::Key_Alt)
         _select_multiple_objects_pressed = false;
-    if(event->key() == Qt::Key_Q)
-        _select_multiple_objects_pressed = false;
+
+
 }
 
 void GMlibWrapper::wheelEventOccurred(const QString& name, QWheelEvent* event) {

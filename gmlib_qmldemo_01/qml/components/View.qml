@@ -13,8 +13,8 @@ Item {
   signal forceRender
 
   Rectangle {
-    id: bah
-    color: "gray"
+      id: bah
+      color: "#000000"
     anchors.fill: parent
     visible: false // root.resizing
   }
@@ -35,7 +35,7 @@ Item {
       color: "white"
       font {
         bold: true
-        weight: Font.Black
+        weight: Font.bold
       }
     }
   }

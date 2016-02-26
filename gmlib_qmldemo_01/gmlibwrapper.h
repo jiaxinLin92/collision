@@ -1,5 +1,5 @@
 
-//class Testsphere;
+class Testsphere;
 //class MP;
 //class Controller;
 class GLContextSurfaceWrapper;
@@ -100,10 +100,11 @@ private:
   bool                                              _move_object_button_pressed {false};
   bool                                              _select_multiple_objects_pressed {false};
   bool                                              _rotate_object_button_pressed {false};
-//  bool                                              _give_ball_force{false};
+ //  bool                                              _select_objects_pressed {false};
   GMlib::Point<int,2>                               _current_mouse_pos;
   GMlib::Point<int,2>                               _prev_mouse_pos;
 //  Controller *                                      _con;
+  Testsphere*                                       _cBall;
 
 signals:
   void                                              signFrameReady();

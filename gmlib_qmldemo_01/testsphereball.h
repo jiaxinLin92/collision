@@ -60,9 +60,106 @@ public:
 
     GMlib::Vector<float,3> getDs()
     {
-      return _ds;
+    return _ds;
 
     }
+
+
+
+    void moveUp()
+       {
+           GMlib::Vector<float,3> newVel = this->getVelocity();
+           if (newVel[1] < 10.0 && newVel[1] > -10.0)   //y
+           {
+               if (newVel[1] < 0.0)
+               {
+                   newVel[1] = 0.0;
+               }
+
+               newVel[1] += 1;
+
+               this->setVelocity(newVel);
+
+           }
+           else
+           {
+               while (newVel[1] >= 10.0 || newVel[1] <= -10.0)
+               {
+                   newVel[1] *= 0.9;
+                   this->setVelocity(newVel);
+               }
+           }
+       }
+       void moveDown()
+       {
+           GMlib::Vector<float,3> newVel = this->getVelocity();
+           if (newVel[1] < 10.0 && newVel[1] > -10.0)
+           {
+               if (newVel[1] > 0.0)
+               {
+                   newVel[1] = 0.0;
+               }
+
+               newVel[1] -= 1;
+
+               this->setVelocity(newVel);
+           }
+           else
+           {
+               while (newVel[1] >= 10.0 || newVel[1] <= -10.0)
+               {
+                   newVel[1] *= 0.9;
+                   this->setVelocity(newVel);
+               }
+           }
+       }
+       void moveRight()
+       {
+           GMlib::Vector<float,3> newVel = this->getVelocity();
+           if (newVel[0] < 10.0 && newVel[0] > -10.0)
+           {
+               if (newVel[0] < 0.0)
+               {
+                   newVel[0] = 0.0;
+               }
+
+               newVel[0] += 1;
+
+               this->setVelocity(newVel);
+           }
+           else
+           {
+               while (newVel[0] >= 10.0 || newVel[0] <= -10.0)
+               {
+                   newVel[0] *= 0.9;
+                   this->setVelocity(newVel);
+               }
+           }
+       }
+       void moveLeft()
+       {
+           GMlib::Vector<float,3> newVel = this->getVelocity();
+           if (newVel[0] < 10.0 && newVel[0] > -10.0)
+           {
+               if (newVel[0] > 0.0)
+               {
+                   newVel[0] = 0.0;
+               }
+
+               newVel[0] -= 1;
+
+
+               this->setVelocity(newVel);
+           }
+           else
+           {
+               while (newVel[0] >= 10.0 || newVel[0] <= -10.0)
+               {
+                   newVel[0] *= 0.9;
+                   this->setVelocity(newVel);
+               }
+           }
+       }
 
 //    void setPosition(GMlib::Point<float,3> pos)
 //    {

@@ -5,17 +5,20 @@ import QtQuick.Controls 1.1
 import "qrc:/qml/components"
 
 Item {
-  id: root
+    id: root
 
-  View {
-    id: singleview; anchors.fill: parent;
-    visible: true;
-    name: "Projection";
+    View {
+        id: singleview; anchors.fill: parent;
+        visible: true;
+        name: "Projection";
+
+
+
 //    name: "Iso"
   }
 
-//  RelativeSplitView {
-//    id: multiview
+    //  RelativeSplitView {
+    //    id: multiview
 //    anchors.fill: parent
 //    orientation: Qt.Vertical
 
@@ -80,35 +83,17 @@ Item {
 //        }
 //      }
 //    }
-//  }
+  //  }
+
 
   QtObject {
-    id: d
+      id: d
 
-    function viewsChanging() { return multiview.resizing || sp1.resizing || sp2.resizing }
+      function viewsChanging() { return multiview.resizing || sp1.resizing || sp2.resizing }
   }
 
-//  states: [
-//    State{
-//      name: "projection_view"
-//      PropertyChanges { target: multiview; visible: false }
-//      PropertyChanges { target: singleview; visible: true; name: projection_view.name }
-//    },
-//    State{
-//      name: "top_view"
-//      PropertyChanges { target: multiview; visible: false }
-//      PropertyChanges { target: singleview; visible: true; name: top_view.name }
-//    },
-//    State{
-//      name: "side_view"
-//      PropertyChanges { target: multiview; visible: false }
-//      PropertyChanges { target: singleview; visible: true; name: side_view.name }
-//    },
-//    State{
-//      name: "front_view"
-//      PropertyChanges { target: multiview; visible: false }
-//      PropertyChanges { target: singleview; visible: true; name: front_view.name }
-//    }
-//  ]
+
+
+
 
 }
