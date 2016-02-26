@@ -1,0 +1,543 @@
+% What kind of text document should we build
+\documentclass[a4,10pt]{article}
+
+
+% Include packages we need for different features (the less, the better)
+
+% Clever cross-referencing
+\usepackage{cleveref}
+
+% Math
+\usepackage{amsmath}
+
+% Algorithms
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{titlesec}
+\usepackage{lipsum}% just to generate text for the example
+\usepackage{listings} 
+\usepackage{url}
+
+\titleformat{\section}%
+  [hang]% <shape>
+  {\normalfont\bfseries\Large}% <format>
+  {}% <label>
+  {0pt}% <sep>
+  {}% <before code>
+\renewcommand{\thesection}{}% Remove section references...
+\renewcommand{\thesubsection}{\arabic{subsection}}
+
+% Tikz
+\RequirePackage{tikz}
+\usetikzlibrary{arrows,shapes,calc,through,intersections,decorations.markings,positioning}
+
+\tikzstyle{every picture}+=[remember picture]
+
+\RequirePackage{pgfplots}
+
+
+
+
+% Set TITLE, AUTHOR and DATE
+\title{Advanced Game- and Simulator Programming(STE6245 )}
+\author{Jiaxin Lin(140740)}
+\date{\today}
+ 
+
+
+\begin{document}
+
+
+
+  % Create the main title section
+  \maketitle
+
+  \begin{abstract}
+   This is the report about the Simulation of collision.Using GMlib, class Sphere and class Psurf from UiT-Campus Narvik.The report main to
+description of GMlib,programming style,the important part of collision detection system
+ and demo of project.
+   
+  \end{abstract}
+
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%  The main content of the report  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+  \section{1 Introduction}
+This is a description of GMlib Library,the main class use in the project and the C++ programming style. 
+%\vspace{10pt}
+ \subsection*{1.1 GMlib Library}
+ %\vspace{10pt}
+GMlib is free software for use with geometric modelling with parametric in C++.In the project,
+Visualization of the balls and walls are using GMlib.The libary was make and update by UIT-Campus Narvik.
+
+   \subsection*{1.2 Main Class}
+In this project I creat class Testsphere,Controller inherit from PSphere, class MYPlanenine inherit form PSurf,class MP inherit from PPlane.The PSphere and PPlane both inherit from Psurf.
+%\vspace{10pt}
+   \subsubsection*{1.2.1 PSphere Class}
+This class to creat balls.In this class have some functions.
+\begin{table}[H]
+\centering
+\caption{Class PSphere main functions}
+\label{my-label}
+\begin{tabular}{lll}
+\cline{1-2}
+\multicolumn{1}{|l|}{\textbf{Functions}} & \multicolumn{1}{l|}{\textbf{Means}}                                                                                                                                                                    &  \\ \cline{1-2}
+\multicolumn{1}{|l|}{PSphere}            & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}This is the construction function to create the ball.\\ And have overload the constructor.\end{tabular}}                                                &  \\ \cline{1-2}
+\multicolumn{1}{|l|}{getRadius}          & \multicolumn{1}{l|}{This function to get the sphere radius.}                                                                                                                                           &  \\ \cline{1-2}
+\multicolumn{1}{|l|}{setRadius}          & \multicolumn{1}{l|}{This function to set the sphere radius.}                                                                                                                                           &  \\ \cline{1-2}
+\multicolumn{1}{|l|}{eval}               & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}This function to set matrix.Using formula to \\ createthe shape like the ball in 3D.\\ (the function parameter member inherit from PSurf)\end{tabular}} &  \\ \cline{1-2}
+
+\end{tabular}
+\end{table}
+\subsubsection*{1.2.2 PPlane Class}
+This class to creat walls.The main function follow in the Table 2.
+
+\begin{table}[H]
+\centering
+\caption{Class PPlane main functions}
+\label{my-label}
+\begin{tabular}{ll}
+\hline
+\multicolumn{1}{|l|}{\textbf{Functions}} & \multicolumn{1}{l|}{\textbf{Means}}                                                                                                                   \\ \hline
+\multicolumn{1}{|l|}{PPlane}             & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}This is the construction function to create the plane.\\ Need one point and two vectors.\end{tabular}} \\ \hline
+\multicolumn{1}{|l|}{getNormal}          & \multicolumn{1}{l|}{This function to get the normal of the surfaces.}                                                                                 \\ \hline
+\multicolumn{1}{|l|}{getU}               & \multicolumn{1}{l|}{This function to get the Vector U(vector u use to create wall).}                                                                  \\ \hline
+\multicolumn{1}{|l|}{getV}               & \multicolumn{1}{l|}{This function to get the Vector V(vector v use to create wall).}                                                                  \\ \hline
+\multicolumn{1}{|l|}{setU}               & \multicolumn{1}{l|}{This function to set the Vector U(vector u use to create wall).}                                                                  \\ \hline
+\multicolumn{1}{|l|}{setV}               & \multicolumn{1}{l|}{This function to set the Vector V(vector v use to create wall).}                                                                  \\ \hline
+\multicolumn{1}{|l|}{setP}               & \multicolumn{1}{l|}{This function to set the point of create the wall.}                                                                               \\ \hline
+                                                                                                                                                                                            
+\end{tabular}
+\end{table}
+
+\subsubsection*{1.2.3 PSurf Class}
+This is the basic class to create the surface.This class inherit from Parametrics.
+The class PSurf have lots of functions which use to creat the surface you want in 3D.
+Just look the inheritance diagram follow the figure.
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=1.00\textwidth]{gfx/Psurf.png}
+      \caption{Inheritance diagram for Psurf}
+      \label{fig:psurf}
+    \end{figure}
+
+   \subsection*{1.3 Fundamental Types}
+
+\begin{table}[H]
+\centering
+\caption{ Main Types}
+\label{my-label}
+\begin{tabular}{ll}
+\hline
+\multicolumn{1}{|l|}{\textbf{Fundamental Types}} & \multicolumn{1}{l|}{\textbf{Means}}                                                                                                                                                  \\ \hline
+\multicolumn{1}{|l|}{GMlib::Vector}              & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}In the project this is the important type of variable.\\ The vector have length and direction.It is a template\\ class.\end{tabular}} \\ \hline
+\multicolumn{1}{|l|}{GMlib::Point}               & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}This type to create a point.It is a template like the \\ vector.\end{tabular}}                                                        \\ \hline
+\multicolumn{1}{|l|}{GMlib::Array}               & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}This type to create a array.It is a container to store \\ the number of balls,walls and collision.\end{tabular}}                      \\ \hline
+                                                                                                                                                                                     
+\end{tabular}
+\end{table}
+
+   \subsection*{1.4 Programming Style}
+In this project follow some programming style.
+ \begin{itemize}
+\item Using Allman style.if, for, while, namespace braces, write in a new line.
+\item Naming class using uppercase.
+\item  Private member variables using underline.
+\item Naming the type bool add is(such as isEmpty).
+\item Using tab to indent.
+\end{itemize}
+
+
+  \section{2 QT Framework}
+
+Qt is used mainly for developing application software with graphical user interfaces.
+ Qt supports many compilers, including the GCC C++ compiler and the Visual Studio suite.
+Qt 5 was officially released on 19 December 2012. This new version marked a major change in the platform, with hardware-accelerated graphics, QML and JavaScript playing a major role. The traditional C++-only QWidgets continued to be supported, but did not benefit from the performance improvements available through the new architecture.\cite{IEEEhowto:two} Qt 5 brings significant improvements to the speed and ease of developing user interfaces.\cite{IEEEhowto:three}In this project using Qt 
+Version 5.4.
+
+
+  \section{3 Theory}
+This part introduce some theory whic use in this project.First give some concept and then description of class.
+   \subsection*{3.1 Concept-Compute Step}
+    This concepet use to calculate the ball next step when the ball move.
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=1.00\textwidth]{gfx/ComputeStep.png}
+
+
+      \caption{The ball move}
+      \label{fig:fi}
+    \end{figure}
+
+According the project 
+
+\begin{flalign}
+\begin{split}
+ \_{ ds}=dt*\_{velocity} + (0.5*dt*dt)*g
+\end{split}&
+\end{flalign}
+
+\begin{flalign}
+\begin{split}
+ \_{p} = P*ds
+\end{split}&
+\end{flalign}
+
+\begin{flalign}
+\begin{split}
+ \_n ={m[0][0]} + r*n
+\end{split}&
+\end{flalign}
+
+\begin{flalign}
+\begin{split}
+ \_{ ds}=n-P
+\end{split}&
+\end{flalign}
+
+   \subsection*{3.2 Concept-Ball Wall Collision}
+	This is the main part of collision.First need to know where is the wall.
+Creat wall need parameter follow the table.
+\begin{table}[H]
+\centering
+\caption{My caption}
+\label{my-label}
+\begin{tabular}{ll}
+\hline
+\multicolumn{1}{|l|}{\textbf{Variable}} & \multicolumn{1}{l|}{\textbf{Means}}                         \\ \hline
+\multicolumn{1}{|l|}{Vector1}           & \multicolumn{1}{l|}{one direction of create the wall}       \\ \hline
+\multicolumn{1}{|l|}{Vector2}           & \multicolumn{1}{l|}{other direction of create the wall}     \\ \hline
+\multicolumn{1}{|l|}{Point}             & \multicolumn{1}{l|}{Decide the position to create the wall} \\ \hline                                        
+\end{tabular}
+\end{table}
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=1.10\textwidth]{gfx/BW.png}
+      \caption{Ball Wall Collision}
+      \label{fig:fi}
+    \end{figure}
+
+From this figure can see clearly how to detect the ball and wall collision and caculate the related data.
+
+\begin{flalign}
+\begin{split}\label{eq:some}
+<d+xds,n>=r 
+\end{split}&
+from\quad the\quad red\quad  line\quad  .
+\end{flalign}
+Solve this formular to caculate x.
+
+\begin{flalign}
+\begin{split}\label{eq:some}
+<d,n>+x<ds,n>=r 
+\end{split}&
+\end{flalign}
+
+\begin{flalign}
+\begin{split}\label{eq:some}
+x=\frac{r-<d,n>}{<ds,n>}
+\end{split}&
+\end{flalign}
+Check if the value of ds*n less than 0 and the variable x between 0 and 1 the collision is detected.
+
+\begin{flalign}
+\begin{split}\label{eq:some}
+V = V -2*(n*V)*n
+\end{split}&
+\end{flalign}
+Set new velocity after collision.
+
+   \subsection*{3.3 Concept-Ball Ball Collision}
+ This part of ball with ball collision.The ball constructor
+have some parameter follow the table.
+
+\begin{table}[H]
+\centering
+\caption{ball constructor parameter}
+\label{my-label}
+\begin{tabular}{ll}
+\hline
+\multicolumn{1}{|l|}{\textbf{Parameter}} & \multicolumn{1}{l|}{\textbf{Means}}                                            \\ \hline
+\multicolumn{1}{|l|}{mass}               & \multicolumn{1}{l|}{The mass of the ball.}                                     \\ \hline
+\multicolumn{1}{|l|}{velocity}           & \multicolumn{1}{l|}{The velocity of the ball}                                  \\ \hline
+\multicolumn{1}{|l|}{radius}             & \multicolumn{1}{l|}{From the GMlib::PSphere,the radius of the ball}            \\ \hline
+\multicolumn{1}{|l|}{plane}              & \multicolumn{1}{l|}{The ball move on the plane.Decide what kind of the plane.} \\ \hline
+                                                                         
+\end{tabular}
+\end{table}
+
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=1.10\textwidth]{gfx/BB.png}
+      \caption{Ball Ball Collision}
+      \label{fig:fi}
+    \end{figure}
+
+From the figure can make an equation.
+
+\begin{flalign}
+\begin{split}\label{eq:some}
+P_{1}+xds1-(p_{2}+xds2)=p_{1}-p_{2}+x(ds1-ds2)=dp+xds
+\end{split}&
+\end{flalign}
+
+\begin{flalign}
+\begin{split}\label{eq:some}
+<dp+xds,dp+xds>=r^{2}
+\end{split}&
+\end{flalign}
+
+Simplification
+\begin{flalign}
+\begin{split}\label{eq:some}
+<ds,ds>x^{2}+2<ds,dp>x+<dp,dp>-r^{2}=0
+\end{split}&
+\end{flalign}
+
+To caculate x,x should between 0 and 1.\\
+\\
+$a=<ds,ds>$ \\
+$b=2<ds,dp>x$\\
+$c=<dp,dp>-r^{2}$
+
+\begin{flalign}
+\begin{split}\label{eq:some}
+x=\frac{-b\pm{\sqrt{b^{2}-4ac}}}{2a}
+\end{split}&
+\end{flalign}
+
+The new velocity after collision follow the below figure.
+
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=1.20\textwidth]{gfx/BBV.png}
+      \caption{set new velocity}
+      \label{fig:fi}
+    \end{figure}
+
+From the figure can get some formula.
+\begin{flalign}
+\begin{split}\label{eq:some}
+d=p2-p1
+\end{split}&
+\end{flalign}
+The ball 1
+\begin{flalign}
+\begin{split}
+v1=(V1*d)*d \quad\quad
+v1n=V1-v1
+\end{split}&
+\end{flalign}
+The ball 2
+\begin{flalign}
+\begin{split}
+v2=(V2*d)*d \quad\quad
+v2n=V2-v2
+\end{split}&
+\end{flalign}
+The new velocity with mass
+\begin{flalign}
+\begin{split}
+V1after=\frac{m1-m2}{m1+m2}*v1+\frac{2*m1}{m1+m2}*v2
+\end{split}&
+\end{flalign}
+
+\begin{flalign}
+\begin{split}
+V2after=\frac{m2-m1}{m1+m2}*v1+\frac{2*m2}{m1+m2}*v2
+\end{split}&
+\end{flalign}
+The finnal velocity of the ball
+\begin{flalign}
+\begin{split}
+V1new=V1after+v1n
+\end{split}&
+\end{flalign}
+
+\begin{flalign}
+\begin{split}
+V2new=V2after+v2n
+\end{split}&
+\end{flalign}
+
+  \section{4 Structure of the resulating application}
+\subsection*{4.1 Structure of this project}
+The project base on teacher's framework.
+In this project add five parts,the main part is the Controller. The planenine means 
+using nine point to create floor.
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=1.10\textwidth]{gfx/structure.png}
+      \caption{The structure of the project}
+      \label{fig:fi}
+    \end{figure}
+
+\subsection*{4.2 Description of each class}
+Class list.Here are the classes.
+
+\begin{table}[H]
+\centering
+\caption{Class List}
+\label{my-label}
+\begin{tabular}{ll}
+\hline
+\multicolumn{1}{|l|}{\textbf{Classes}} & \multicolumn{1}{l|}{\textbf{Brief descriptions}}                                                                                      \\ \hline
+\multicolumn{1}{|l|}{Testsphere}       & \multicolumn{1}{l|}{Inherit the PSphere.To create a ball.}                                                                            \\ \hline
+\multicolumn{1}{|l|}{MP}               & \multicolumn{1}{l|}{Inherit the PPlane.In this project to create walls.}                                                              \\ \hline
+\multicolumn{1}{|l|}{MYPlanenine}      & \multicolumn{1}{l|}{Inherit the PSurf.In this project to create the floor.}                                                           \\ \hline
+\multicolumn{1}{|l|}{Collison}         & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}This class to define collision.Ball with ball and Ball\\ with wall\end{tabular}}       \\ \hline
+\multicolumn{1}{|l|}{Controller}       & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}This class to find when have collision.The main part of \\ this project.\end{tabular}} \\
+\hline 
+\end{tabular}
+\end{table}
+
+
+\subsubsection*{4.2.1 Class Testsphere}
+This class to define the ball.The properties of the ball included
+
+
+\begin{table}[H]
+\centering
+\caption{Class Testsphere}
+\label{my-label}
+\begin{tabular}{ll}
+\hline
+\multicolumn{1}{|l|}{\textbf{Properties}}        & \multicolumn{1}{l|}{\textbf{Descriptions}}                                   \\ \hline
+\multicolumn{1}{|l|}{GMlib::Vector \_velocity}   & \multicolumn{1}{l|}{The velocity of the ball.}                               \\ \hline
+\multicolumn{1}{|l|}{int \_mass}                 & \multicolumn{1}{l|}{The mass of the ball.}                                   \\ \hline
+\multicolumn{1}{|l|}{GMlib::Vector \_ds}         & \multicolumn{1}{l|}{The distance of the ball move.}                          \\ \hline
+\multicolumn{1}{|l|}{MYPlanenine* \_plane}       & \multicolumn{1}{l|}{The floor of the ball move.Make connect with the floor.} \\ \hline
+\multicolumn{1}{|l|}{double \_x}                 & \multicolumn{1}{l|}{The time to store.}                                      \\ \hline
+
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\centering
+\caption{Functions of the Testsphere}
+\label{my-label}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Function} & \textbf{Means}                                \\ \hline
+TestSphere        & Constructor,To set initial value of the ball. \\ \hline
+setVelocity       & Set new velocity of the ball.                 \\ \hline
+getVelocity       & Get velocity of the ball.                     \\ \hline
+setMass           & Set new mass of the ball.                     \\ \hline
+getMass           & Get mass of the ball.                         \\ \hline
+setX              & Set run time of the ball.                     \\ \hline
+getX              & Get the store of time.                        \\ \hline
+moveUp            & Control the ball to move up.                  \\ \hline
+moveDown          & Control the ball to move down.                \\ \hline
+moveLeft          & Control the ball to move left.                \\ \hline
+moveRight         & Control the ball to move right.               \\ \hline
+computeStep       & Compute the ball move to next step.           \\ \hline
+getSurfnormal     & To get the normal of the surface.             \\ \hline
+\end{tabular}
+\end{table}
+
+\subsubsection*{4.2.2 Class MP}
+This class inherit teacher's class PPlane.This class using to create walls.
+Using one point and two vector.
+
+\subsubsection*{4.2.3 Class MYPlanenine}
+This class inherit teacher's class PSurf.This class using to create floors.
+Using nine points set a matrix.
+
+\subsubsection*{4.2.4 Class Collision}
+
+\begin{table}[H]
+\centering
+\caption{Class Collision}
+\label{my-label}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Properties}         & \textbf{Descriptions}                          \\ \hline
+Testsphere *\_sphere{[}2{] }            & The array of Testsphere class.                 \\ \hline
+MP *\_wall;                 & Define the wall.                               \\ \hline
+bool \_isSw;                & Define weather ball and wall collision or not. \\ \hline
+double \_x                  & The time to store.                             \\ \hline
+operator ==                 & Operator overloading to compare to collision.  \\ \hline
+bool operator \textless     & Operator overloading to compare to collision.  \\ \hline
+\end{tabular}
+\end{table}
+
+\subsubsection*{4.2.5 Class Controller}
+\begin{table}[H]
+\centering
+\caption{ Class Controller}
+\label{my-label}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Properties}           & \textbf{Descriptions}                                                 \\ \hline
+MYPlanenine* \_plane          & Define the floor surfaces.                                            \\ \hline
+GMlib::Array \_sphereArray    & This is the array to contain balls.                                   \\ \hline
+GMlib::Array \_wallArray      & This is the array to contain walls.                                   \\ \hline
+GMlib::Array \_collisionArray & This is the array to contain collisions.                              \\ \hline
+void addSphere                & Add ball into the ball array.                                         \\ \hline
+void addWall                  & Add wall into the wall array.                                         \\ \hline
+void findcollisionSW          & This is a function to find ball and wall collision.                   \\ \hline
+void findcollisionSS          & This is a function to find ball and ball collision.                   \\ \hline
+void collisionSW              & This is a function to set new velocity after ball and wall collision. \\ \hline
+void collisionSS              & This is a function to set new velocity after ball and wall collision. \\ \hline
+\end{tabular}
+\end{table}
+
+  \section{QT Keyboard control}
+This part trying to control ball by keyboard.In the GMlibWrapper::keyPressed to set keys.
+Using up,down,left,right to control ball velocity.
+
+ \section{demo}
+This part to show some interface in the project.
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=1.00\textwidth]{gfx/demo1.png}
+      \caption{demo 1}
+      \label{fig:fi}
+    \end{figure}
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=1.00\textwidth]{gfx/demo2.png}
+      \caption{demo 2}
+      \label{fig:fi}
+    \end{figure}
+
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=1.00\textwidth]{gfx/demo3.png}
+      \caption{demo 2}
+      \label{fig:fi}
+    \end{figure}
+
+
+  \section{Conclusion}
+    In conclusion,this project is  based on the lectures in the course: geometric modelling.
+Througe this project understand the vector better.Practise better than theory.Moreover,with use the 
+GMlib libary and see the code form the teacher.
+Final need to say thank you to my classmates.They help me a lot.
+  
+% Include the bibliography
+\begin{thebibliography}{1}
+
+
+%\bibitem{h}
+%\url{http://episteme.hin.no/dox/GMlib2/classGMlib_1_1TriangleFacets.html}
+
+
+\bibitem{IEEEhowto:two}
+Qt5-feedback (Mailing list), \emph{Concern about removal of QWidget classes},\hskip 1em plus
+  0.5em minus 0.4em\relax 7 October 2011.
+
+\bibitem{IEEEhowto:three}
+Knoll, Lars, \emph{Thoughts about Qt 5},\hskip 1em plus
+  0.5em minus 0.4em\relax Retrieved 9 May 2011.
+\
+\end{thebibliography}
+\end{document}
